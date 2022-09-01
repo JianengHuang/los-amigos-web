@@ -26,6 +26,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<AlertStatus>('info');
   const [message, setMessage] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
+
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -41,14 +43,16 @@ const Login = () => {
       })}
       onSubmit={(values, actions) => {
         setLoading(true);
+        let input = { ...values, rememberMe };
         axios
-          .post('http://localhost:4000/login', values, {
+          .post('http://localhost:4000/login', input, {
             withCredentials: true,
           })
           .then((res: AxiosResponse) => {
             setStatus('success');
             setMessage('Inicio de sesion exitoso');
             setLoading(false);
+            window.location.href = '/';
           })
           .catch((err: AxiosError) => {
             setStatus('error');
@@ -114,7 +118,12 @@ const Login = () => {
                   ></TextField>
                 </Stack>
                 <HStack justify='space-between'>
-                  <Checkbox defaultChecked>Remember me</Checkbox>
+                  {/* <Checkbox
+                    defaultChecked
+                    onChange={() => setRememberMe(!rememberMe)}
+                  >
+                    Remember me
+                  </Checkbox> */}
                   <Button variant='link' colorScheme='blue' size='sm'>
                     Forgot password?
                   </Button>

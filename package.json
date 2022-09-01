@@ -1,0 +1,8 @@
+{
+  "name": "mern-menu-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/JianengHuang/los-amigos-web.git",
+  "author": "Jianeng Huang <jianengh@gmail.com>",
+  "license": "MIT"
+}

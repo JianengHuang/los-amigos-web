@@ -1,11 +1,17 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const db = () => {
   try {
     mongoose.connect(
-      'mongodb+srv://Huang:Doudou2010@cluster0.lvvoq.mongodb.net/?retryWrites=true&w=majority'
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/test'
     );
-    console.log('Connected To Mongo');
+    if (process.env.MONGODB_URI) {
+      console.log('Connected To Mongo');
+    } else {
+      console.log('Connected To Local Mongo');
+    }
   } catch (e) {
     console.error(e);
   }

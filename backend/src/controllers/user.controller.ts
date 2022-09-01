@@ -4,7 +4,8 @@ import User from '../models/User';
 import bcrypt from 'bcryptjs';
 
 export const createUser = async (req: Request, res: Response) => {
-  const { email, password } = req?.body;
+  let { email, password } = req?.body;
+  if (email && typeof email === 'string') email = email.toLowerCase();
   if (
     !email ||
     !password ||

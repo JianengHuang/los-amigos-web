@@ -8,6 +8,7 @@ import db from './services/db';
 import passport from 'passport';
 import passportConfig from './config/passport-config';
 
+dotenv.config();
 // Connection to DB
 db();
 
@@ -17,7 +18,7 @@ app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(
   session({
-    secret: 'secretcode',
+    secret: 'process.env.SESSION_SECRET',
     resave: true,
     saveUninitialized: true,
   })
@@ -32,6 +33,6 @@ passportConfig();
 // Routes
 app.use('/', userRoutes);
 
-app.listen(4000, () => {
-  console.log('Server started');
+app.listen(process.env.PORT, () => {
+  console.log('Server started in port: ' + process.env.PORT);
 });

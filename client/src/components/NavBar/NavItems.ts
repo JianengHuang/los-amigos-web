@@ -5,7 +5,7 @@ export interface NavItem {
   href?: string;
 }
 
-export const NAV_ITEMS: Array<NavItem> = [
+export const NAV_ITEMS_NOLOGIN: Array<NavItem> = [
   {
     label: 'Inicio',
     href: '/',
@@ -22,10 +22,10 @@ export const NAV_ITEMS: Array<NavItem> = [
     //   },
     // ],
   },
-  {
-    label: 'Perfil',
-    href: '/profile',
-  },
+  // {
+  //   label: 'Perfil',
+  //   href: '/profile',
+  // },
   // {
   //   label: 'Hire Designers',
   //   href: '#',
@@ -45,4 +45,20 @@ export const NAV_ITEMS: Array<NavItem> = [
   //     },
   //   ],
   // },
+];
+
+export const NAV_ITEMS_LOGIN: Array<NavItem> = [
+  ...NAV_ITEMS_NOLOGIN,
+  {
+    label: 'Perfil',
+    href: '/profile',
+  },
+];
+
+export const NAV_ITEMS_ADMIN: Array<NavItem> = [
+  ...NAV_ITEMS_LOGIN,
+  {
+    label: 'Admin',
+    href: '/admin',
+  },
 ];
