@@ -58,7 +58,7 @@ const Register = () => {
             }
             setLoading(false);
           })
-          .catch((err: any) => {
+          .catch((err: AxiosError) => {
             setStatus('error');
             console.log('error', err);
             setMessage(err.message);

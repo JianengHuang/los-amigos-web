@@ -13,16 +13,26 @@ import {
 
 import { ChevronRightIcon } from '@chakra-ui/icons';
 
-import { NAV_ITEMS, NavItem } from './NavItems';
+import { useContext, useState } from 'react';
+
+import { SelectedContext } from '../../pages/Context';
+
+import { NavItem } from './NavItems';
+
+import useNavItems from './hooks/useNavItems';
 
 export const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  const context = useContext(SelectedContext);
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
+
+  useNavItems(context, setNavItems);
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {navItems.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>

@@ -11,18 +11,37 @@ import {
 
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
-import { NavItem, NAV_ITEMS } from './NavItems';
+import { NavItem } from './NavItems';
+
+import { useContext, useState } from 'react';
+
+import { SelectedContext } from '../../pages/Context';
+
+import useNavItems from './hooks/useNavItems';
 
 export const MobileNav = () => {
+  const [navItems, setNavItems] = useState<NavItem[]>([]);
+  const context = useContext(SelectedContext);
+
+  useNavItems(context, setNavItems);
+
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       p={4}
       display={{ md: 'none' }}
     >
-      {NAV_ITEMS.map((navItem) => (
+      {navItems.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
+      {context ? (
+        <MobileNavItem label={'Cerrar sesión'} href={'/logout'} />
+      ) : (
+        <>
+          <MobileNavItem label={'Iniciar sesión'} href={'/login'} />
+          <MobileNavItem label={'Registrarse'} href={'/register'} />
+        </>
+      )}
     </Stack>
   );
 };

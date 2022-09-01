@@ -10,17 +10,18 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react';
-
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-
 import { DesktopNav } from './DesktopNav';
-
 import { MobileNav } from './MobileNav';
+import { useContext } from 'react';
+import { SelectedContext } from '../../pages/Context';
+import logout from './utils/logout';
 
 // import restaurantLogo from './restaurant-logo.png';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
+  const context = useContext(SelectedContext);
 
   return (
     <Box>
@@ -62,39 +63,52 @@ export default function WithSubnavigation() {
             <DesktopNav />
           </Flex>
         </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-        >
+        {context ? (
           <Button
             as={'a'}
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={500}
-            href={'/login'}
+            onClick={logout}
             bg={'gray.700'}
             _hover={{ bg: 'gray.600' }}
           >
-            Iniciar sesión
+            Cerrar sesión
           </Button>
-          <Button
-            as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'/register'}
-            _hover={{
-              bg: 'pink.300',
-            }}
+        ) : (
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={'flex-end'}
+            direction={'row'}
+            spacing={6}
           >
-            Crear Cuenta
-          </Button>
-        </Stack>
+            <Button
+              as={'a'}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={500}
+              href={'/login'}
+              bg={'gray.700'}
+              _hover={{ bg: 'gray.600' }}
+            >
+              Iniciar sesión
+            </Button>
+            <Button
+              as={'a'}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'pink.400'}
+              href={'/register'}
+              _hover={{
+                bg: 'pink.300',
+              }}
+            >
+              Crear Cuenta
+            </Button>
+          </Stack>
+        )}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
