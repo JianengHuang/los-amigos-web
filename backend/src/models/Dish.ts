@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const dishSchema = new mongoose.Schema({
+  id: {
+    type: number,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
