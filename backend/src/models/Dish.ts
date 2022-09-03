@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const dishSchema = new mongoose.Schema({
   id: {
-    type: number,
+    type: Number,
     required: true,
   },
   name: {

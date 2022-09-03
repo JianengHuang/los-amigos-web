@@ -2,9 +2,9 @@ import express, { Request, Response } from 'express';
 import { createUser } from '../controllers/user.controller';
 import passport from 'passport';
 import emailToLowerCase from '../middlewares/emailToLowerCase';
-import { UserInterface } from '../interfaces/UserInterface';
 import User from '../models/User';
 import isAdministratorMiddleware from '../middlewares/isAdministratorMiddleware';
+import { getAll } from '../controllers/global.controller';
 
 const userRouter = express.Router();
 
@@ -58,18 +58,6 @@ userRouter.delete(
   }
 );
 
-userRouter.get('/getallusers', isAdministratorMiddleware, async (req, res) => {
-  await User.find({}, (err: Error, data: UserInterface[]) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(data);
-    }
-  })
-    .clone()
-    .catch((err) => {
-      console.error(err);
-    });
-});
+userRouter.get('/getall', isAdministratorMiddleware, getAll(User));
 
 export default userRouter;
