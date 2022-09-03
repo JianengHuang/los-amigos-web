@@ -5,7 +5,7 @@ dotenv.config();
 const db = () => {
   try {
     mongoose.connect(
-      process.env.MONGODB_URI || 'mongodb://localhost:27017/test'
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/restaurant'
     );
     if (process.env.MONGODB_URI) {
       console.log('Connected To Mongo');

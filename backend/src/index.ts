@@ -4,7 +4,8 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes';
-import db from './services/db';
+import dishRoutes from './routes/dish.routes';
+import db from './db';
 import passport from 'passport';
 import passportConfig from './config/passport-config';
 
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(
   session({
-    secret: 'process.env.SESSION_SECRET',
+    secret: process.env.SESSION_SECRET || 'secret',
     resave: true,
     saveUninitialized: true,
   })
@@ -31,7 +32,8 @@ app.use(passport.session());
 passportConfig();
 
 // Routes
-app.use('/', userRoutes);
+app.use('/user', userRoutes);
+app.use('/dish', dishRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log('Server started in port: ' + process.env.PORT);
