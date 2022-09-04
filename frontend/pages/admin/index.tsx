@@ -7,11 +7,20 @@ import {
   Editable,
   EditablePreview,
   EditableTextarea,
+  useColorModeValue,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import { useState, useRef } from 'react';
 import Axios from 'axios';
-import useGetAll from '../hooks/useGetAll';
+import useGetAll from '../../hooks/useGetAll';
+import AddDishForm from './AddDishForm';
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,9 +36,34 @@ const Admin = () => {
         Admin
       </Heading>
       <VStack spacing={4} w='100%' maxW='500px' mx='auto'>
-        <Button mt={3} ref={btnRef} onClick={onOpen} color={'teal.100'}>
-          Add Recipe
+        <Button
+          mt={3}
+          ref={btnRef}
+          onClick={onOpen}
+          color={useColorModeValue('teal.800', 'teal.100')}
+          bgColor={useColorModeValue('teal.100', 'teal.800')}
+        >
+          Añadir Plato
         </Button>
+        <Modal
+          onClose={onClose}
+          finalFocusRef={btnRef}
+          isOpen={isOpen}
+          scrollBehavior={'inside'}
+          size={'xl'}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Añadir Plato</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <AddDishForm />
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={onClose}>Cerrar</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </VStack>
       <SimpleGrid minChildWidth='120px' spacing='20px' margin={10}>
         {dishes.map((dish: any) => (
@@ -37,7 +71,7 @@ const Admin = () => {
             {Object.keys(dish)
               .filter((key) => key !== '_id')
               .map((key: any, index: number) => (
-                <Editable key={index} defaultValue={dish[key]}>
+                <Editable key={index} defaultValue={dish[key]} border='1px'>
                   <EditablePreview />
                   <EditableTextarea />
                 </Editable>

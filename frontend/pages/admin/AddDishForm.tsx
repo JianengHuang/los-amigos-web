@@ -8,10 +8,11 @@ import {
 } from '@chakra-ui/react';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Formik } from 'formik';
-import TextField from './FormField/TextField';
+import TextField from '../../components/FormField/TextField';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { AlertStatus } from '@chakra-ui/react';
+import formData from './formData';
 
 const AddDishForm = () => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ const AddDishForm = () => {
   return (
     <Formik
       initialValues={{
+        id: '',
         name: '',
         ingredients: [''],
         price: '',
@@ -28,6 +30,7 @@ const AddDishForm = () => {
         category: '',
       }}
       validationSchema={Yup.object({
+        id: Yup.number().required('Id es necesario'),
         name: Yup.string().required('Nombre es necesario'),
         ingredients: Yup.array().of(
           Yup.string().required('Ingrediente es necesario')
@@ -39,7 +42,7 @@ const AddDishForm = () => {
       onSubmit={(values: any, actions: any) => {
         setLoading(true);
         axios
-          .post('http://localhost:4000/dish/', values, {
+          .post('http://localhost:4000/dish/createdish', values, {
             withCredentials: true,
           })
           .then((res: AxiosResponse) => {
@@ -67,7 +70,7 @@ const AddDishForm = () => {
           as='form'
           mx='auto'
           w={{ base: '90%', md: 500 }}
-          h='100vh'
+          h='70vh'
           justifyContent='center'
           //@ts-ignore
           onSubmit={formik.handleSubmit}
@@ -80,39 +83,15 @@ const AddDishForm = () => {
             </Alert>
           ) : null}
 
-          <TextField
-            name='name'
-            label='Nombre'
-            placeholder='Escribe el nombre del plato...'
-          ></TextField>
-
-          <TextField
-            name='ingredients'
-            label='Ingredientes'
-            type='array'
-            placeholder='Escribe los ingredientes...'
-          ></TextField>
-
-          <TextField
-            name='price'
-            label='Precio'
-            type='number'
-            placeholder='Escribe el precio...'
-          ></TextField>
-
-          <TextField
-            name='image'
-            label='Imagen'
-            type='string'
-            placeholder='Escribe el link de la photo...'
-          ></TextField>
-
-          <TextField
-            name='category'
-            label='Categoria'
-            type='string'
-            placeholder='Escribe la categoria...'
-          ></TextField>
+          {formData.map((field) => (
+            <TextField
+              key={field.name}
+              name={field.name}
+              label={field.label}
+              type={field.type}
+              placeholder={field.placeholder}
+            />
+          ))}
 
           <Button
             isLoading={loading ? true : false}
@@ -120,7 +99,7 @@ const AddDishForm = () => {
             variant='outline'
             colorScheme='teal'
           >
-            Crear Cuenta
+            Aceptar
           </Button>
         </VStack>
       )}
