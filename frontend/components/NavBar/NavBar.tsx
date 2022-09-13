@@ -18,6 +18,7 @@ import { MobileNav } from './MobileNav';
 import { useContext } from 'react';
 import { SelectedContext } from '../../utils/Context';
 import logout from '../../utils/logout';
+import { useEffect } from 'react';
 
 // import restaurantLogo from './restaurant-logo.png';
 
@@ -25,6 +26,9 @@ export default function WithSubnavigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
   const context = useContext(SelectedContext);
+  useEffect(() => {
+    console.log(context);
+  }, []);
 
   return (
     <Box>
@@ -87,7 +91,7 @@ export default function WithSubnavigation() {
               flex={{ base: 1, md: 0 }}
               justify={'flex-end'}
               direction={'row'}
-              spacing={6}
+              spacing={3}
             >
               <Button
                 as={'a'}
