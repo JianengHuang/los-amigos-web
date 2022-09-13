@@ -24,7 +24,7 @@ const AddDishForm = () => {
       initialValues={{
         id: '',
         name: '',
-        ingredients: [''],
+        ingredients: '',
         price: '',
         image: '',
         category: '',
@@ -32,17 +32,19 @@ const AddDishForm = () => {
       validationSchema={Yup.object({
         id: Yup.number().required('Id es necesario'),
         name: Yup.string().required('Nombre es necesario'),
-        ingredients: Yup.array().of(
-          Yup.string().required('Ingrediente es necesario')
-        ),
+        ingredients: Yup.string().required('Ingredientes son necesarios'),
         price: Yup.number().required('Precio es necesario'),
-        image: Yup.string().required('Imagen es necesario'),
         category: Yup.string().required('Categoria es necesario'),
       })}
       onSubmit={(values: any, actions: any) => {
+        const newValues = values;
+        newValues.image = `/public/images/${values.id}`;
+        newValues.ingredients = values.ingredients
+          .split(',')
+          .map((item: any) => item.trim());
         setLoading(true);
         axios
-          .post('http://localhost:4000/dish/createdish', values, {
+          .post('http://localhost:4000/dish/createdish', newValues, {
             withCredentials: true,
           })
           .then((res: AxiosResponse) => {
@@ -82,7 +84,6 @@ const AddDishForm = () => {
               <AlertTitle>{message}</AlertTitle>
             </Alert>
           ) : null}
-
           {formData.map((field) => (
             <TextField
               key={field.name}
@@ -92,7 +93,6 @@ const AddDishForm = () => {
               placeholder={field.placeholder}
             />
           ))}
-
           <Button
             isLoading={loading ? true : false}
             type='submit'

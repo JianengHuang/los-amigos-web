@@ -14,7 +14,7 @@ const formData = [
   {
     name: 'ingredients',
     label: 'Ingredientes',
-    type: 'array',
+    type: 'string',
     placeholder: 'Arroz, zanahoria, huevo',
   },
   {
