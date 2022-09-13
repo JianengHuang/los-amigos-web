@@ -25,7 +25,7 @@ userRouter.post(
   }
 );
 
-userRouter.get('/user', (req: Request, res: Response) => {
+userRouter.get('/getuser', (req: Request, res: Response) => {
   res.send(req.user);
 });
 
