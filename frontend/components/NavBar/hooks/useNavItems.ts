@@ -6,7 +6,7 @@ import {
   NAV_ITEMS_NOLOGIN,
 } from '../NavItems';
 
-import userInterface from '../../../interfaces/userInterface';
+import userInterface from '../../../interfaces/UserInterface';
 
 const useNavItems = (
   context: Partial<userInterface>,
