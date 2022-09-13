@@ -1,7 +1,6 @@
-interface userInterface {
-  id: string;
+interface UserInterface {
   email: string;
   isAdmin: boolean;
 }
 
-export default userInterface;
+export default UserInterface;
