@@ -18,9 +18,9 @@ import {
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import { useState, useRef } from 'react';
-import Axios from 'axios';
 import useGetAll from '../../hooks/useGetAll';
 import AddDishForm from './AddDishForm';
+import withAuth from '../../utils/withAuth';
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,7 +28,6 @@ const Admin = () => {
   const btnRef = useRef(null);
   const [dishes, setDishes] = useState<any>([]);
   useGetAll('dish', setDishes);
-  console.log(dishes);
 
   return (
     <>
@@ -69,9 +68,12 @@ const Admin = () => {
         {dishes.map((dish: any) => (
           <Box key={dish.id} bg='tomato'>
             {Object.keys(dish)
-              .filter((key) => key !== '_id')
+              .filter((key) => key !== '_id' && key !== '__v')
               .map((key: any, index: number) => (
                 <Editable key={index} defaultValue={dish[key]} border='1px'>
+                  <p>
+                    <em>{key}</em>
+                  </p>
                   <EditablePreview />
                   <EditableTextarea />
                 </Editable>
