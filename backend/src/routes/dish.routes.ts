@@ -8,6 +8,6 @@ const dishRouter = express.Router();
 
 dishRouter.post('/createdish', isAdministratorMiddleware, createDish);
 
-dishRouter.get('/getall', isAdministratorMiddleware, getAll(Dish));
+dishRouter.get('/getall', getAll(Dish));
 
 export default dishRouter;
