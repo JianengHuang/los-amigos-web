@@ -38,7 +38,7 @@ const AddDishForm = () => {
       })}
       onSubmit={(values: any, actions: any) => {
         const newValues = values;
-        newValues.image = `/public/images/${values.id}`;
+        newValues.image = `/images/${values.id}.png`;
         newValues.ingredients = values.ingredients
           .split(',')
           .map((item: any) => item.trim());
