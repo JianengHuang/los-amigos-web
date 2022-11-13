@@ -7,7 +7,6 @@ const useFetchDishes = (setDishes: any) => {
     Axios.get('http://localhost:4000/dish/getall')
       .then((response) => {
         setDishes(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
