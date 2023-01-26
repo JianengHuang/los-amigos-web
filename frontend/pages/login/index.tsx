@@ -21,12 +21,14 @@ import { emailRegEx } from '../../utils/regex';
 import { Logo } from './Logo';
 import { OAuthButtonGroup } from './OAuthButtonGroup';
 import * as Yup from 'yup';
+import { useUserUpdate } from '../../utils/Context';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<AlertStatus>('info');
   const [message, setMessage] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
+  const updateUser = useUserUpdate();
 
   return (
     <Formik
@@ -48,7 +50,8 @@ const Login = () => {
             setStatus('success');
             setMessage('Inicio de sesion exitoso');
             setLoading(false);
-            window.location.href = '/';
+            updateUser();
+            // window.location.href = '/';
           })
           .catch((err: AxiosError) => {
             setStatus('error');
