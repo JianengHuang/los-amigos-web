@@ -6,10 +6,10 @@ import {
   NAV_ITEMS_NOLOGIN,
 } from '../NavItems';
 
-import userInterface from '../../../interfaces/UserInterface';
+import { ContextInterface } from '../../../utils/Context';
 
 const useNavItems = (
-  context: Partial<userInterface>,
+  context: ContextInterface,
   setNavItems: (navItems: NavItem[]) => void
 ) => {
   useEffect(() => {

@@ -12,19 +12,15 @@ const Home: NextPage = () => {
     <>
       <SimpleGrid minChildWidth='120px' spacing='20px' margin={10}>
         {dishes?.map((dish: any) => (
-          <Box key={dish.id} bg='tomato'>
+          <Box key={dish._id} bg='tomato'>
             {Object.keys(dish)
-              .filter((key) => key !== '_id' && key !== '__v')
+              .filter((key) => key !== '_id' && key !== '__v' && key !== 'image')
               .map((key: any, index: number) => {
-                if (key === 'image') {
-                  return <></>;
-                } else {
-                  return (
-                    <p key={index}>
-                      {key}: {dish[key]}
-                    </p>
-                  );
-                }
+                return (
+                  <p key={index}>
+                    {key}: {dish[key]}
+                  </p>
+                );
               })}
             <Image
               src={dish['image']}

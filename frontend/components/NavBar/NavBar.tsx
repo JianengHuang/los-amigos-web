@@ -15,20 +15,19 @@ import {
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { DesktopNav } from './DesktopNav';
 import { MobileNav } from './MobileNav';
-import { useContext } from 'react';
-import { SelectedContext } from '../../utils/Context';
 import logout from '../../utils/logout';
 import { useEffect } from 'react';
+import { useUser } from '../../utils/Context';
 
 // import restaurantLogo from './restaurant-logo.png';
 
 export default function WithSubnavigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
-  const context = useContext(SelectedContext);
+  const user = useUser();
   useEffect(() => {
-    console.log(context);
-  }, []);
+    console.log(user);
+  });
 
   return (
     <Box>
@@ -74,7 +73,7 @@ export default function WithSubnavigation() {
           <Button onClick={toggleColorMode}>
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
-          {context ? (
+          {user ? (
             <Button
               as={'a'}
               display={{ base: 'none', md: 'inline-flex' }}
