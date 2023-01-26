@@ -4,10 +4,7 @@ import UserInterface from '../interfaces/UserInterface';
 
 export type ContextInterface = UserInterface | undefined;
 
-export const SelectedContext = createContext<ContextInterface>({
-  email: 'jianeng6@gmail.com',
-  isAdmin: true,
-});
+export const SelectedContext = createContext<ContextInterface>(undefined);
 
 export const ContextProvider = (props: PropsWithChildren<any>) => {
   const [user, setUser] = useState<any>();
