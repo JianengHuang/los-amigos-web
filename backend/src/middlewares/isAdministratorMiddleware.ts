@@ -22,7 +22,7 @@ const isAdministratorMiddleware = async (
       }
     });
   } else {
-    res.send('No user found');
+    res.send('Not logged in');
   }
 };
 

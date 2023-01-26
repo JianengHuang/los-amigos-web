@@ -7,7 +7,7 @@ import useFetchDishes from '../components/NavBar/hooks/useFetchDishes';
 const Home: NextPage = () => {
   const [dishes, setDishes] = useState<any>([]);
   useFetchDishes(setDishes);
-  const [link, setLink] = useState('/images/26.jpg');
+  const [link, setLink] = useState('/images/27.jpg');
   return (
     <>
       <SimpleGrid minChildWidth='120px' spacing='20px' margin={10}>
