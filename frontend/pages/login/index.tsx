@@ -21,13 +21,15 @@ import { emailRegEx } from '../../utils/regex';
 import { Logo } from './Logo';
 import { OAuthButtonGroup } from './OAuthButtonGroup';
 import * as Yup from 'yup';
-import { useUserUpdate } from '../../utils/Context';
+import { useUser, useUserUpdate } from '../../utils/Context';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<AlertStatus>('info');
   const [message, setMessage] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
+  const router = useRouter();
   const updateUser = useUserUpdate();
 
   return (
@@ -51,7 +53,7 @@ const Login = () => {
             setMessage('Inicio de sesion exitoso');
             setLoading(false);
             updateUser();
-            // window.location.href = '/';
+            router.push('/')
           })
           .catch((err: AxiosError) => {
             setStatus('error');

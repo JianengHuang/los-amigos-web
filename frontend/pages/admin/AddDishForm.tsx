@@ -28,6 +28,7 @@ const AddDishForm = () => {
         price: '',
         image: '',
         category: '',
+        allergens: '',
       }}
       validationSchema={Yup.object({
         id: Yup.number().required('Id es necesario'),
@@ -35,11 +36,16 @@ const AddDishForm = () => {
         ingredients: Yup.string().required('Ingredientes son necesarios'),
         price: Yup.number().required('Precio es necesario'),
         category: Yup.string().required('Categoria es necesario'),
+        allergens: Yup.string().required('Alergenos son necesarios'),
       })}
       onSubmit={(values: any, actions: any) => {
         const newValues = values;
         newValues.image = `/images/${values.id}.jpg`;
         newValues.ingredients = values.ingredients
+          .split(',')
+          .map((item: any) => item.trim());
+        setLoading(true);
+        newValues.allergens = values.allergens
           .split(',')
           .map((item: any) => item.trim());
         setLoading(true);

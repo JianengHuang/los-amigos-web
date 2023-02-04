@@ -15,9 +15,9 @@ import {
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { DesktopNav } from './DesktopNav';
 import { MobileNav } from './MobileNav';
-import logout from '../../utils/logout';
-import { useEffect } from 'react';
 import { useUser } from '../../utils/Context';
+import { useRouter } from 'next/router';
+import logout from '../../utils/logout';
 
 // import restaurantLogo from './restaurant-logo.png';
 
@@ -25,9 +25,7 @@ export default function WithSubnavigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
   const user = useUser();
-  useEffect(() => {
-    console.log(user);
-  });
+  const router = useRouter();
 
   return (
     <Box>

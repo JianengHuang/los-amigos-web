@@ -35,7 +35,7 @@ export const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
       {context ? (
-        <MobileNavItem label={'Cerrar sesión'} href={'/logout'} />
+        <MobileNavItem label={'Cerrar sesión'} href={'/'} />
       ) : (
         <>
           <MobileNavItem label={'Iniciar sesión'} href={'/login'} />

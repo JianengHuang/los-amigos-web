@@ -14,7 +14,9 @@ const Home: NextPage = () => {
         {dishes?.map((dish: any) => (
           <Box key={dish._id} bg='tomato'>
             {Object.keys(dish)
-              .filter((key) => key !== '_id' && key !== '__v' && key !== 'image')
+              .filter(
+                (key) => key !== '_id' && key !== '__v' && key !== 'image'
+              )
               .map((key: any, index: number) => {
                 return (
                   <p key={index}>
