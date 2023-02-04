@@ -21,6 +21,7 @@ import { useState, useRef } from 'react';
 import useGetAll from '../../hooks/useGetAll';
 import AddDishForm from './AddDishForm';
 import withAuth from '../../utils/withAuth';
+import { useUser } from '../../utils/Context';
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
