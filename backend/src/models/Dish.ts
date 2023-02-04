@@ -27,6 +27,12 @@ const dishSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  allergens: [
+    {
+      type: Number,
+      required: true,
+    },
+  ],
 });
 
 export default mongoose.model('Dish', dishSchema, 'menu');

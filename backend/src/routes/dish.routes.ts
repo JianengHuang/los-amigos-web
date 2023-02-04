@@ -12,7 +12,7 @@ const dishRouter = express.Router();
 
 dishRouter.post('/createdish', isAdministratorMiddleware, createDish);
 
-dishRouter.post('/editdish/:id', isAdministratorMiddleware, editDish);
+dishRouter.put('/editdish/:id', isAdministratorMiddleware, editDish);
 
 dishRouter.get('/getall', getAll(Dish));
 
