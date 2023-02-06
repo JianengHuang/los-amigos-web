@@ -4,4 +4,5 @@ export interface DishInterface {
   price: number;
   image: string;
   category: string;
+  allergens: string[];
 }

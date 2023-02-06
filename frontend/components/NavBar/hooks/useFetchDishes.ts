@@ -12,7 +12,7 @@ const useFetchDishes = (setDishes: any) => {
         console.log(error);
         console.log('Error fetching dishes');
       });
-  });
+  }, []);
 };
 
 export default useFetchDishes;
