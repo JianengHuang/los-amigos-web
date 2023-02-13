@@ -49,10 +49,8 @@ const AddDishForm = () => {
         newValues.ingredients = values.ingredients;
         newValues.allergens = values.allergens;
         setLoading(true);
+        console.log(newValues);
         createDish(newValues, { setStatus, setMessage, setLoading });
-        console.log(`newValues: ${JSON.stringify(newValues, null, 2)}`);
-        console.log(`values: ${JSON.stringify(values, null, 2)}`);
-        // router.reload();
       }}
     >
       {(formik) => (
