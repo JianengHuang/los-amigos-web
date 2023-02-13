@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
 import { DishInterface } from '../interfaces/DishInterface';
 import Dish from '../models/Dish';
+import isJson from '../utils/isJson';
+import stringToArray from '../utils/stringToArray';
 
 export const createDish = async (req: Request, res: Response) => {
   const { id, name, ingredients, price, image, category, allergens } =
     req?.body;
   if (
-    !id ||
+    id === undefined ||
     !name ||
     !ingredients ||
     !price ||
@@ -15,15 +17,19 @@ export const createDish = async (req: Request, res: Response) => {
     !allergens ||
     typeof id !== 'number' ||
     typeof name !== 'string' ||
-    ingredients.length === 0 ||
-    !ingredients.some(isNaN) ||
+    typeof ingredients !== 'string' ||
     typeof price !== 'number' ||
     typeof image !== 'string' ||
     typeof category !== 'string' ||
-    allergens.length === 0 ||
-    allergens.some(isNaN)
+    typeof allergens !== 'string'
   ) {
-    res.status(400).json({ error: 'Incorrect Values' });
+    res.status(422).json({ error: 'Incorrect Values' });
+    return;
+  }
+  const ingredientsArray = stringToArray(ingredients);
+  const allergensArray = stringToArray(allergens);
+  if (ingredientsArray.length === 0 || allergensArray.length === 0) {
+    res.status(422).json({ error: 'Incomplete / Missing Values' });
     return;
   }
   Dish.findOne({ id }, async (err: Error, doc: DishInterface) => {
@@ -33,8 +39,8 @@ export const createDish = async (req: Request, res: Response) => {
       return;
     }
     if (!doc) {
-      const ingredientsNoDuplicates = [...new Set(ingredients)];
-      const allergensNoDuplicates = [...new Set(allergens)];
+      const ingredientsNoDuplicates = [...new Set(ingredientsArray)];
+      const allergensNoDuplicates = [...new Set(allergensArray)];
       try {
         const newDish = new Dish({
           id,
@@ -58,6 +64,8 @@ export const editDish = async (req: Request, res: Response) => {
   const _id = req.params.id;
   const { id, name, ingredients, price, image, category, allergens } =
     req?.body;
+  const ingredientsArray = stringToArray(ingredients);
+  const allergensArray = stringToArray(allergens);
   if (
     !id ||
     !name ||
@@ -67,19 +75,17 @@ export const editDish = async (req: Request, res: Response) => {
     !category ||
     typeof id !== 'number' ||
     typeof name !== 'string' ||
-    ingredients.length === 0 ||
-    !ingredients.some(isNaN) ||
+    ingredientsArray.length === 0 ||
     typeof price !== 'number' ||
     typeof image !== 'string' ||
     typeof category !== 'string' ||
-    allergens.length === 0 ||
-    allergens.some(isNaN)
+    allergensArray.length === 0
   ) {
     res.status(400).json({ error: 'Incorrect Values' });
     return;
   }
-  const ingredientsNoDuplicates = [...new Set(ingredients)];
-  const allergensNoDuplicates = [...new Set(allergens)];
+  const ingredientsNoDuplicates = [...new Set(ingredientsArray)];
+  const allergensNoDuplicates = [...new Set(allergensArray)];
   Dish.findByIdAndUpdate(
     _id,
     {

@@ -6,30 +6,45 @@ import {
   AlertTitle,
   Button,
 } from '@chakra-ui/react';
-import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Formik } from 'formik';
-import TextField from '../../components/FormField/TextField';
+import TextField from '../../../components/FormField/TextField';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { AlertStatus } from '@chakra-ui/react';
-import formData from './formData';
+import formData from '../data/formData';
+import { Dish } from '../../../typings';
+import createDish from '../utils/createDish';
+import editDish from '../utils/editDish';
+import { useRouter } from 'next/router';
+import DishContainer from './DishContainer';
 
-const AddDishForm = () => {
+interface Props {
+  initialValues?: Dish;
+  isEditing: boolean;
+  dish: Dish;
+}
+
+const defaultInitialValues = {
+  id: '',
+  name: '',
+  ingredients: '',
+  price: '',
+  image: '',
+  category: '',
+  allergens: '',
+};
+
+const EditDishForm = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<AlertStatus>('info');
   const [message, setMessage] = useState('');
+  const router = useRouter();
 
   return (
     <Formik
-      initialValues={{
-        id: '',
-        name: '',
-        ingredients: '',
-        price: '',
-        image: '',
-        category: '',
-        allergens: '',
-      }}
+      initialValues={
+        props.initialValues ? props.initialValues : defaultInitialValues
+      }
       validationSchema={Yup.object({
         id: Yup.number().required('Id es necesario'),
         name: Yup.string().required('Nombre es necesario'),
@@ -39,38 +54,25 @@ const AddDishForm = () => {
         allergens: Yup.string().required('Alergenos son necesarios'),
       })}
       onSubmit={(values: any, actions: any) => {
-        const newValues = values;
+        const newValues: Dish = values;
         newValues.image = `/images/${values.id}.jpg`;
         newValues.ingredients = values.ingredients
           .split(',')
           .map((item: any) => item.trim());
+        console.log(newValues.ingredients);
         setLoading(true);
         newValues.allergens = values.allergens
           .split(',')
           .map((item: any) => item.trim());
+        console.log(newValues.allergens);
         setLoading(true);
-        axios
-          .post('http://localhost:4000/dish/createdish', newValues, {
-            withCredentials: true,
-          })
-          .then((res: AxiosResponse) => {
-            console.log(res);
-            if (res.status === 200) {
-              setStatus('success');
-              setMessage('Plato creado correctamente');
-            } else {
-              setStatus('error');
-              setMessage(res.data);
-            }
-            setLoading(false);
-          })
-          .catch((err: AxiosError) => {
-            setStatus('error');
-            console.log('error', err);
-            setMessage(err.message);
-            setLoading(false);
-          });
-        actions.resetForm();
+        if (props.initialValues) {
+          editDish(newValues, { setStatus, setMessage, setLoading });
+          router.reload();
+        } else {
+          createDish(newValues, { setStatus, setMessage, setLoading });
+          router.reload();
+        }
       }}
     >
       {(formik) => (
@@ -83,7 +85,7 @@ const AddDishForm = () => {
           //@ts-ignore
           onSubmit={formik.handleSubmit}
         >
-          <Heading>Añadir Plato</Heading>
+          <Heading>{props ? 'Editar Plato' : 'Añadir Plato'}</Heading>
           {status !== 'info' ? (
             <Alert status={status}>
               <AlertIcon />
@@ -99,18 +101,23 @@ const AddDishForm = () => {
               placeholder={field.placeholder}
             />
           ))}
-          <Button
-            isLoading={loading ? true : false}
-            type='submit'
-            variant='outline'
-            colorScheme='teal'
-          >
-            Aceptar
-          </Button>
+          {props.initialValues ? (
+            <></>
+          ) : (
+            <Button
+              isLoading={loading ? true : false}
+              type='submit'
+              variant='outline'
+              colorScheme='teal'
+            >
+              Aceptar
+            </Button>
+          )}
+          {!props.isEditing && <DishContainer dish={props.dish} />}
         </VStack>
       )}
     </Formik>
   );
 };
 
-export default AddDishForm;
+export default EditDishForm;

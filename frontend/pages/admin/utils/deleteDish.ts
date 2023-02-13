@@ -5,6 +5,9 @@ const deleteDish = (id: string): void => {
     if (res.status === 200) {
       window.location.reload();
     }
+    else {
+      alert('Error deleting dish');
+    }
   });
 };
 
