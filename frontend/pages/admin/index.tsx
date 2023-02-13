@@ -15,20 +15,38 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Flex,
+  ButtonGroup,
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import { useState, useRef } from 'react';
 import useGetAll from '../../hooks/useGetAll';
-import AddDishForm from './AddDishForm';
+import AddDishForm from './components/AddDishForm';
 import withAuth from '../../utils/withAuth';
-import deleteDish from './deleteDish';
+import deleteDish from './utils/deleteDish';
+import { Dish, FilteredDish } from '../../typings';
+import DishContainer from './components/DishContainer';
+import EditDishForm from './components/EditDishForm';
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [scrollBehavior, setScrollBehavior] = useState('inside');
   const btnRef = useRef(null);
-  const [dishes, setDishes] = useState<any>([]);
+  const [dishes, setDishes] = useState<Dish[]>([]);
   useGetAll('dish', setDishes);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentEditValue, setCurrentEditValue] = useState<Dish>({
+    _id: '',
+    id: '',
+    name: '',
+    ingredients: '',
+    price: '',
+    image: '',
+    category: '',
+    allergens: '',
+    __v: '',
+  });
+
+  const handleConfirmation = () => {};
 
   return (
     <>
@@ -65,21 +83,31 @@ const Admin = () => {
           </ModalContent>
         </Modal>
       </VStack>
-      <SimpleGrid minChildWidth='120px' spacing='20px' margin={10}>
-        {dishes.map((dish: any) => (
-          <Box key={dish.id} bg='tomato'>
-            {Object.keys(dish)
-              .filter((key) => key !== '_id' && key !== '__v')
-              .map((key: any, index: number) => (
-                <Editable key={index} defaultValue={dish[key]} border='1px'>
-                  <p>
-                    <em>{key}</em>
-                  </p>
-                  <EditablePreview />
-                  <EditableTextarea />
-                </Editable>
-              ))}
-            <Button color='red' onClick={() => deleteDish(dish._id)}>Eliminar</Button>
+      <SimpleGrid minChildWidth='200px' spacing='20px' margin={10}>
+        {dishes.map((dish) => (
+          <Box key={dish.id} bg='purple.200' color='black'>
+            {isEditing && (
+              <EditDishForm
+                initialValues={dish}
+                isEditing={isEditing}
+                dish={dish}
+              />
+            )}
+            <Flex justifyContent={'center'} padding='2'>
+              <ButtonGroup gap='2'>
+                <Button bg='red.200' onClick={() => deleteDish(dish._id)}>
+                  Eliminar
+                </Button>
+                {isEditing && (
+                  <Button bg='green.200' onClick={handleConfirmation}>
+                    Confirmar
+                  </Button>
+                )}
+                <Button bg='blue.200' onClick={() => setIsEditing(!isEditing)}>
+                  Editar
+                </Button>
+              </ButtonGroup>
+            </Flex>
           </Box>
         ))}
       </SimpleGrid>
