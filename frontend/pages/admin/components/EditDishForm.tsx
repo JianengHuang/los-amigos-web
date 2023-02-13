@@ -9,42 +9,29 @@ import {
 import { Formik } from 'formik';
 import TextField from '../../../components/FormField/TextField';
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useImperativeHandle, useState } from 'react';
 import { AlertStatus } from '@chakra-ui/react';
 import formData from '../data/formData';
-import { Dish } from '../../../typings';
+import { Dish, FilteredDish } from '../../../typings';
 import createDish from '../utils/createDish';
 import editDish from '../utils/editDish';
 import { useRouter } from 'next/router';
 import DishContainer from './DishContainer';
 
 interface Props {
-  initialValues?: Dish;
+  initialValues: Dish;
   isEditing: boolean;
   dish: Dish;
 }
-
-const defaultInitialValues = {
-  id: '',
-  name: '',
-  ingredients: '',
-  price: '',
-  image: '',
-  category: '',
-  allergens: '',
-};
 
 const EditDishForm = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<AlertStatus>('info');
   const [message, setMessage] = useState('');
-  const router = useRouter();
 
   return (
     <Formik
-      initialValues={
-        props.initialValues ? props.initialValues : defaultInitialValues
-      }
+      initialValues={props.initialValues}
       validationSchema={Yup.object({
         id: Yup.number().required('Id es necesario'),
         name: Yup.string().required('Nombre es necesario'),
@@ -53,26 +40,19 @@ const EditDishForm = (props: Props) => {
         category: Yup.string().required('Categoria es necesario'),
         allergens: Yup.string().required('Alergenos son necesarios'),
       })}
-      onSubmit={(values: any, actions: any) => {
-        const newValues: Dish = values;
-        newValues.image = `/images/${values.id}.jpg`;
-        newValues.ingredients = values.ingredients
-          .split(',')
-          .map((item: any) => item.trim());
-        console.log(newValues.ingredients);
+      onSubmit={(values, actions) => {
         setLoading(true);
-        newValues.allergens = values.allergens
-          .split(',')
-          .map((item: any) => item.trim());
-        console.log(newValues.allergens);
-        setLoading(true);
-        if (props.initialValues) {
-          editDish(newValues, { setStatus, setMessage, setLoading });
-          router.reload();
-        } else {
-          createDish(newValues, { setStatus, setMessage, setLoading });
-          router.reload();
-        }
+        console.log('submitted');
+        const newValues: Dish = {
+          ...values,
+          image: `/images/${values.id}.jpg`,
+          ingredients: values.ingredients,
+          allergens: values.allergens,
+          _id: props.dish._id,
+          __v: props.dish.__v,
+        };
+        editDish(newValues, { setStatus, setMessage, setLoading });
+        setLoading(false);
       }}
     >
       {(formik) => (
@@ -85,7 +65,7 @@ const EditDishForm = (props: Props) => {
           //@ts-ignore
           onSubmit={formik.handleSubmit}
         >
-          <Heading>{props ? 'Editar Plato' : 'Añadir Plato'}</Heading>
+          <Heading>Editar Plato</Heading>
           {status !== 'info' ? (
             <Alert status={status}>
               <AlertIcon />
@@ -101,19 +81,17 @@ const EditDishForm = (props: Props) => {
               placeholder={field.placeholder}
             />
           ))}
-          {props.initialValues ? (
-            <></>
-          ) : (
+          {!props.isEditing && <DishContainer dish={props.dish} />}
+          {props.isEditing && (
             <Button
-              isLoading={loading ? true : false}
               type='submit'
               variant='outline'
-              colorScheme='teal'
+              isLoading={loading ? true : false}
+              bg='green.200'
             >
-              Aceptar
+              Confirmar
             </Button>
           )}
-          {!props.isEditing && <DishContainer dish={props.dish} />}
         </VStack>
       )}
     </Formik>

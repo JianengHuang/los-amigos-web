@@ -15,7 +15,7 @@ const editDish = (
 ) => {
   const id = newValues._id;
   axios
-    .post(`http://localhost:4000/dish/editDish/${id}`, newValues, {
+    .put(`http://localhost:4000/dish/editDish/${id}`, newValues, {
       withCredentials: true,
     })
     .then((res: AxiosResponse) => {

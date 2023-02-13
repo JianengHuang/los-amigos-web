@@ -27,26 +27,15 @@ import deleteDish from './utils/deleteDish';
 import { Dish, FilteredDish } from '../../typings';
 import DishContainer from './components/DishContainer';
 import EditDishForm from './components/EditDishForm';
+import filterDish from './utils/filterDish';
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
   const [dishes, setDishes] = useState<Dish[]>([]);
-  useGetAll('dish', setDishes);
+  useGetAll('dish', dishes, setDishes);
+  filterDish(dishes, setDishes);
   const [isEditing, setIsEditing] = useState(false);
-  const [currentEditValue, setCurrentEditValue] = useState<Dish>({
-    _id: '',
-    id: '',
-    name: '',
-    ingredients: '',
-    price: '',
-    image: '',
-    category: '',
-    allergens: '',
-    __v: '',
-  });
-
-  const handleConfirmation = () => {};
 
   return (
     <>
@@ -86,23 +75,18 @@ const Admin = () => {
       <SimpleGrid minChildWidth='200px' spacing='20px' margin={10}>
         {dishes.map((dish) => (
           <Box key={dish.id} bg='purple.200' color='black'>
-            {isEditing && (
+            {isEditing ? (
               <EditDishForm
                 initialValues={dish}
                 isEditing={isEditing}
                 dish={dish}
               />
-            )}
+            ) : <DishContainer dish={dish} />}
             <Flex justifyContent={'center'} padding='2'>
               <ButtonGroup gap='2'>
                 <Button bg='red.200' onClick={() => deleteDish(dish._id)}>
                   Eliminar
                 </Button>
-                {isEditing && (
-                  <Button bg='green.200' onClick={handleConfirmation}>
-                    Confirmar
-                  </Button>
-                )}
                 <Button bg='blue.200' onClick={() => setIsEditing(!isEditing)}>
                   Editar
                 </Button>
