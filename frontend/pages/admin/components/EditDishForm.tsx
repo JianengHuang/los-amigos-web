@@ -11,7 +11,7 @@ import TextField from '../../../components/FormField/TextField';
 import * as Yup from 'yup';
 import { useImperativeHandle, useState } from 'react';
 import { AlertStatus } from '@chakra-ui/react';
-import formData from '../data/formData';
+import formData from '../../../lib/formData';
 import { Dish, FilteredDish } from '../../../typings';
 import createDish from '../utils/createDish';
 import editDish from '../utils/editDish';
@@ -72,7 +72,7 @@ const EditDishForm = (props: Props) => {
               <AlertTitle>{message}</AlertTitle>
             </Alert>
           ) : null}
-          {formData.map((field) => (
+          {formData?.map((field) => (
             <TextField
               key={field.name}
               name={field.name}

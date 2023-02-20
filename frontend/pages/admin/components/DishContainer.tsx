@@ -10,7 +10,7 @@ const DishContainer = ({ dish }: Props) => {
   console.log(dish);
   return (
     <>
-      {Object.keys(dish)
+      {dish && Object.keys(dish)
         .filter((key) => key !== '_id' && key !== '__v' && key !== 'image')
         .map((key) => (
           <Box bg='purple.200' key={dish._id}>

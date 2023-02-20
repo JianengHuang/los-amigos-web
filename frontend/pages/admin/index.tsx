@@ -24,17 +24,17 @@ import useGetAll from '../../hooks/useGetAll';
 import AddDishForm from './components/AddDishForm';
 import withAuth from '../../utils/withAuth';
 import deleteDish from './utils/deleteDish';
-import { Dish, FilteredDish } from '../../typings';
+import { Dish } from '../../typings';
 import DishContainer from './components/DishContainer';
 import EditDishForm from './components/EditDishForm';
-import filterDish from './utils/filterDish';
+import useFilterDish from './utils/filterDish';
 
 const Admin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
   const [dishes, setDishes] = useState<Dish[]>([]);
   useGetAll('dish', dishes, setDishes);
-  filterDish(dishes, setDishes);
+  useFilterDish(dishes, setDishes);
   const [isEditing, setIsEditing] = useState(false);
 
   return (

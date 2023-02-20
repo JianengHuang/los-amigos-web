@@ -18,8 +18,8 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import TextField from '../../components/FormField/TextField';
 import { emailRegEx } from '../../utils/regex';
-import { Logo } from './Logo';
-import { OAuthButtonGroup } from './OAuthButtonGroup';
+// import { Logo } from './Logo';
+import OAuthButtonGroup from './components/OAuthButtonGroup';
 import * as Yup from 'yup';
 import { useUser, useUserUpdate } from '../../utils/Context';
 import { useRouter } from 'next/router';
@@ -53,7 +53,7 @@ const Login = () => {
             setMessage('Inicio de sesion exitoso');
             setLoading(false);
             updateUser();
-            router.push('/')
+            router.push('/');
           })
           .catch((err: AxiosError) => {
             setStatus('error');
@@ -74,7 +74,7 @@ const Login = () => {
         >
           <Stack spacing='8'>
             <Stack spacing='6'>
-              <Logo />
+              {/* <Logo /> */}
               <Stack spacing={{ base: '2', md: '3' }} textAlign='center'>
                 Inicia Sesión
                 {status !== 'info' ? (
