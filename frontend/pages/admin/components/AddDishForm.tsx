@@ -11,7 +11,7 @@ import TextField from '../../../components/FormField/TextField';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { AlertStatus } from '@chakra-ui/react';
-import formData from '../data/formData';
+import formData from '../../../lib/formData';
 import { FilteredDish } from '../../../typings';
 import createDish from '../utils/createDish';
 import { useRouter } from 'next/router';

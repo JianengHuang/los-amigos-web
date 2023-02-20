@@ -1,14 +1,16 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { Dish } from '../../../typings';
 
-const filterDish = (
+const useFilterDish = (
   dishes: Dish[],
   setDishes: Dispatch<SetStateAction<Dish[]>>
 ) => {
-  for (const dish of dishes) {
-    dish.ingredients = dish.ingredients.toString();
-  }
-  return dishes;
+  useEffect(() => {
+    for (let dish of dishes) {
+      dish.ingredients = dish.ingredients.toString();
+    }
+    setDishes(dishes);
+  }, [dishes, setDishes]);
 };
 
-export default filterDish;
+export default useFilterDish;
