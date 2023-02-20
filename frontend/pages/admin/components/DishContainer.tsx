@@ -13,7 +13,7 @@ const DishContainer = ({ dish }: Props) => {
       {Object.keys(dish)
         .filter((key) => key !== '_id' && key !== '__v' && key !== 'image')
         .map((key) => (
-          <Box bg='purple.200'>
+          <Box bg='purple.200' key={dish._id}>
             <Text as='i'>{(key === "")}</Text>
             <Text>{dish[key as keyof Dish]}</Text>
           </Box>
