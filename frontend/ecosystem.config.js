@@ -12,7 +12,7 @@ module.exports = {
 
   deploy: {
     production: {
-      key: 'C:\\Users\\USERNAME\\.ssh\\AWS\\AWS_KEY.pem',
+      key: 'C:/Users/Leo55/.ssh/AWS/AWSKey-1.pem',
       user: 'ubuntu',
       host: '13.36.39.37',
       ref: 'origin/next-13',
@@ -22,7 +22,7 @@ module.exports = {
       'post-deploy':
         'source ~/.nvm/nvm.sh && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
       'pre-setup': '',
-      'ssh_options': 'ForwardAgent=yes',
+      ssh_options: 'ForwardAgent=yes',
     },
   },
 };
