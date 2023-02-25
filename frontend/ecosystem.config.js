@@ -15,8 +15,8 @@ module.exports = {
       key: 'C:/Users/Leo55/.ssh/AWS/AWSKey-1.pem',
       user: 'ubuntu',
       host: '13.36.39.37',
-      ref: 'origin/next-13',
-      repo: 'git@github.com:JianengHuang/los-amigos-web.git',
+      ref: 'origin/master',
+      repo: 'git@github.com:JianengHuang/los-amigos-frontend.git',
       path: '/home/ubuntu/los-amigos-web/frontend',
       'pre-deploy-local': '',
       'post-deploy':
