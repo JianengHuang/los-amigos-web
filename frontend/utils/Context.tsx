@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
-import UserInterface from '../interfaces/UserInterface';
+import UserInterface from '../interfaces/userInterface';
 import Layout from '../components/Layout';
 import Test from '../pages/test';
 

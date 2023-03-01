@@ -2,9 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    appDir: true,
-  },
+  staticPageGenerationTimeout: 1000,
 };
 
 module.exports = nextConfig;
