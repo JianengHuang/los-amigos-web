@@ -17,7 +17,7 @@ import { useContext, useState } from 'react';
 
 import { SelectedContext } from '../../utils/Context';
 
-import { NavItem } from './NavItems';
+import { NavItem, NAV_ITEMS_NOLOGIN } from './NavItems';
 
 import useNavItems from './hooks/useNavItems';
 
@@ -26,13 +26,13 @@ export const DesktopNav = () => {
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
   const context = useContext(SelectedContext);
-  const [navItems, setNavItems] = useState<NavItem[]>([]);
+  // const [navItems, setNavItems] = useState<NavItem[]>([]);
 
-  useNavItems(context, setNavItems);
+  // useNavItems(context, setNavItems);
 
   return (
     <Stack direction={'row'} spacing={4}>
-      {navItems.map((navItem) => (
+      {NAV_ITEMS_NOLOGIN.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>

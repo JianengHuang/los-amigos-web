@@ -29,6 +29,12 @@ const formData = [
     type: 'string',
     placeholder: 'Arroces',
   },
+  {
+    name: 'allergens',
+    label: 'Alergenos',
+    type: 'string',
+    placeholder: '1, 2, 3',
+  },
 ];
 
 export default formData;
