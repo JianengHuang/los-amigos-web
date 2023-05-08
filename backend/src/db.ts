@@ -10,7 +10,7 @@ const db = () => {
     if (process.env.MONGODB_URI) {
       console.log('Connected To Mongo');
     } else {
-      console.log('Connected To Local Mongo');
+      console.log('process.env.MONGODB_URI is not defined');
     }
   } catch (e) {
     console.error(e);

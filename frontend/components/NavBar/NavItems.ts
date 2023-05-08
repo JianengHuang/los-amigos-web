@@ -22,6 +22,10 @@ export const NAV_ITEMS_NOLOGIN: Array<NavItem> = [
     //   },
     // ],
   },
+  {
+    label: 'Admin',
+    href: '/admin',
+  }
   // {
   //   label: 'Perfil',
   //   href: '/profile',

@@ -74,7 +74,7 @@ export default function WithSubnavigation() {
           <Button onClick={toggleColorMode}>
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
-          {context ? (
+          {/* {context ? (
             <Button
               as={'a'}
               display={{ base: 'none', md: 'inline-flex' }}
@@ -119,7 +119,7 @@ export default function WithSubnavigation() {
                 Crear Cuenta
               </Button>
             </Stack>
-          )}
+          )} */}
         </Stack>
       </Flex>
 
