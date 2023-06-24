@@ -1,9 +1,9 @@
-import Axios from 'axios';
-import { useEffect } from 'react';
+import Axios from "axios";
+import { useEffect } from "react";
 
 const useGetAll = (item: string, setItem: (value: Array<any>) => void) => {
   useEffect(() => {
-    Axios.get(`http://localhost:4000/${item}/getall`, { withCredentials: true })
+    Axios.get(`http://localhost:4000/${item}/getall`)
       .then((res) => {
         setItem(res.data);
       })

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const dishSchema = new mongoose.Schema({
   id: {
@@ -27,10 +27,12 @@ const dishSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  allergens: [{
-      type: String,
+  allergens: [
+    {
+      type: Number,
       required: true,
-  }]
+    },
+  ],
 });
 
-export default mongoose.model('Dish', dishSchema, 'menu');
+export default mongoose.model("Dish", dishSchema, "menu");

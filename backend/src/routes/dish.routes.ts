@@ -7,6 +7,7 @@ import {
 import isAdministratorMiddleware from "../middlewares/isAdministratorMiddleware";
 import Dish from "../models/Dish";
 import { getAll } from "../controllers/global.controller";
+import cors from "cors";
 
 const dishRouter = express.Router();
 
