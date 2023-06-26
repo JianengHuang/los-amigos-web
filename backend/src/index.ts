@@ -8,6 +8,7 @@ import dishRoutes from "./routes/dish.routes";
 import db from "./db";
 import passport from "passport";
 import passportConfig from "./config/passport-config";
+import categoryRoutes from "./routes/category.routes";
 
 dotenv.config();
 // Connection to DB
@@ -35,6 +36,7 @@ passportConfig();
 // Routes
 // app.use("/user", userRoutes);
 app.use("/dish", dishRoutes);
+app.use("/category", categoryRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log("Server started in port: " + process.env.PORT);
