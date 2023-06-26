@@ -126,7 +126,12 @@ export const editDish = async (req: Request, res: Response) => {
     async (err: Error, doc: DishInterface) => {
       if (err) throw err;
       if (doc) {
-        res.status(200).json({ message: "Dish edited" });
+        Dish.findOne({ id }, (err: Error, doc: DishInterface) => {
+          if (err) throw err;
+          if (doc) {
+            res.status(200).json({ ...doc._doc });
+          }
+        });
       }
     }
   );
