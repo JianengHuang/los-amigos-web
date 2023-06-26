@@ -33,6 +33,10 @@ const dishSchema = new mongoose.Schema({
       required: true,
     },
   ],
+  isRecommended: {
+    type: Boolean,
+    required: true,
+  },
 });
 
-export default mongoose.model("Dish", dishSchema, "menu");
+export default mongoose.model("Dish", dishSchema, "carta");
