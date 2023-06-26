@@ -96,14 +96,15 @@ export const editDish = async (req: Request, res: Response) => {
     !image ||
     !category ||
     !allergens ||
-    !isRecommended ||
     typeof id !== "number" ||
     typeof name !== "string" ||
     ingredients.length === 0 ||
+    ingredients.every((ingredient: any) => typeof ingredient !== "string") ||
     typeof price !== "number" ||
     typeof image !== "string" ||
     typeof category !== "string" ||
     allergens.length === 0 ||
+    allergens.every((allergen: any) => typeof allergen !== "number") ||
     typeof isRecommended !== "boolean"
   ) {
     res.status(400).json({ error: "Incorrect Values" });
