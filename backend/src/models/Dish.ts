@@ -37,6 +37,11 @@ const dishSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  mightContain: [
+    {
+      type: Number,
+    }
+  ]
 });
 
 export default mongoose.model("Dish", dishSchema, "carta");
