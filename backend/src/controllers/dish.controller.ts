@@ -13,8 +13,9 @@ export const createDish = async (req: Request, res: Response) => {
     category,
     allergens,
     isRecommended,
+    mightContain,
   } = req?.body;
-
+  console.log(mightContain);
   if (
     !id ||
     !name ||
@@ -49,16 +50,35 @@ export const createDish = async (req: Request, res: Response) => {
     if (!doc) {
       try {
         const ingredientsArray = filterStringsInArray(ingredients);
-        const newDish = new Dish({
-          id,
-          name: name.trim().toLowerCase(),
-          ingredients: ingredientsArray,
-          price,
-          image: image.trim().toLowerCase(),
-          category: category.trim().toLowerCase(),
-          allergens,
-          isRecommended,
-        });
+        let newDish;
+        if (
+          mightContain &&
+          mightContain.length > 0 &&
+          mightContain.every((allergen: any) => typeof allergen === "number")
+        ) {
+          newDish = new Dish({
+            id,
+            name: name.trim().toLowerCase(),
+            ingredients: ingredientsArray,
+            price,
+            image: image.trim().toLowerCase(),
+            category: category.trim().toLowerCase(),
+            allergens,
+            isRecommended,
+            mightContain,
+          });
+        } else {
+          newDish = new Dish({
+            id,
+            name: name.trim().toLowerCase(),
+            ingredients: ingredientsArray,
+            price,
+            image: image.trim().toLowerCase(),
+            category: category.trim().toLowerCase(),
+            allergens,
+            isRecommended,
+          });
+        }
         await newDish.save();
         // console.log("attempted to save new dish");
         Dish.findOne({ id }, (err: Error, doc: DishInterface) => {
@@ -77,6 +97,7 @@ export const createDish = async (req: Request, res: Response) => {
 };
 
 export const editDish = async (req: Request, res: Response) => {
+  console.log(req.body);
   const _id = req.params.id;
   const {
     id,
@@ -87,6 +108,7 @@ export const editDish = async (req: Request, res: Response) => {
     category,
     allergens,
     isRecommended,
+    mightContain,
   } = req?.body;
   if (
     !id ||
@@ -111,30 +133,67 @@ export const editDish = async (req: Request, res: Response) => {
     return;
   }
   const ingredientsArray = filterStringsInArray(ingredients);
-  Dish.findByIdAndUpdate(
-    _id,
-    {
-      id,
-      name: name.trim().toLowerCase(),
-      ingredients: ingredientsArray,
-      price,
-      image: image.trim().toLowerCase(),
-      category: category.trim().toLowerCase(),
-      allergens,
-      isRecommended,
-    },
-    async (err: Error, doc: DishInterface) => {
-      if (err) throw err;
-      if (doc) {
-        Dish.findOne({ id }, (err: Error, doc: DishInterface) => {
-          if (err) throw err;
-          if (doc) {
-            res.status(200).json({ ...doc._doc });
-          }
-        });
-      }
-    }
+  console.log(
+    mightContain &&
+      mightContain.length > 0 &&
+      mightContain.every((allergen: any) => typeof allergen === "number")
   );
+  if (
+    mightContain &&
+    mightContain.length > 0 &&
+    mightContain.every((allergen: any) => typeof allergen === "number")
+  ) {
+    Dish.findByIdAndUpdate(
+      _id,
+      {
+        id,
+        name: name.trim().toLowerCase(),
+        ingredients: ingredientsArray,
+        price,
+        image: image.trim().toLowerCase(),
+        category: category.trim().toLowerCase(),
+        allergens,
+        isRecommended,
+        mightContain,
+      },
+      async (err: Error, doc: DishInterface) => {
+        if (err) throw err;
+        if (doc) {
+          Dish.findOne({ id }, (err: Error, doc: DishInterface) => {
+            if (err) throw err;
+            if (doc) {
+              res.status(200).json({ ...doc._doc });
+            }
+          });
+        }
+      }
+    );
+  } else {
+    Dish.findByIdAndUpdate(
+      _id,
+      {
+        id,
+        name: name.trim().toLowerCase(),
+        ingredients: ingredientsArray,
+        price,
+        image: image.trim().toLowerCase(),
+        category: category.trim().toLowerCase(),
+        allergens,
+        isRecommended,
+      },
+      async (err: Error, doc: DishInterface) => {
+        if (err) throw err;
+        if (doc) {
+          Dish.findOne({ id }, (err: Error, doc: DishInterface) => {
+            if (err) throw err;
+            if (doc) {
+              res.status(200).json({ ...doc._doc });
+            }
+          });
+        }
+      }
+    );
+  }
 };
 
 export const deleteDish = async (req: Request, res: Response) => {
