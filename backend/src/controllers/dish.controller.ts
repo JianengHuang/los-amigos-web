@@ -15,7 +15,7 @@ export const createDish = async (req: Request, res: Response) => {
     isRecommended,
     mightContain,
   } = req?.body;
-  console.log(mightContain);
+  console.log(allergens);
   if (
     !id ||
     !name ||
@@ -35,6 +35,7 @@ export const createDish = async (req: Request, res: Response) => {
     allergens.every((allergen: any) => typeof allergen !== "number") ||
     typeof isRecommended !== "boolean"
   ) {
+    console.log(allergens);
     console.log(
       allergens.every((allergen: any) => typeof allergen === "number")
     );
