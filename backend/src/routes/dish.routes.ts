@@ -1,21 +1,23 @@
-import express from 'express';
+import express from "express";
 import {
   createDish,
   editDish,
   deleteDish,
-} from '../controllers/dish.controller';
-import isAdministratorMiddleware from '../middlewares/isAdministratorMiddleware';
-import Dish from '../models/Dish';
-import { getAll } from '../controllers/global.controller';
+} from "../controllers/dish.controller";
+import isAdministratorMiddleware from "../middlewares/isAdministratorMiddleware";
+import Dish from "../models/Dish";
+import { getAll } from "../controllers/global.controller";
+import cors from "cors";
+import Category from "../models/Category";
 
 const dishRouter = express.Router();
 
-dishRouter.post('/createdish', createDish);
+dishRouter.post("/createdish", createDish);
 
-dishRouter.put('/editdish/:id', editDish);
+dishRouter.put("/editdish/:id", editDish);
 
-dishRouter.get('/getall', getAll(Dish));
+dishRouter.get("/getall", getAll(Dish));
 
-dishRouter.delete('/deletedish/:id', deleteDish);
+dishRouter.delete("/deletedish/:id", deleteDish);
 
 export default dishRouter;

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const dishSchema = new mongoose.Schema({
   id: {
@@ -33,6 +33,15 @@ const dishSchema = new mongoose.Schema({
       required: true,
     },
   ],
+  isRecommended: {
+    type: Boolean,
+    required: true,
+  },
+  mightContain: [
+    {
+      type: Number,
+    }
+  ]
 });
 
-export default mongoose.model('Dish', dishSchema, 'menu');
+export default mongoose.model("Dish", dishSchema, "carta");
