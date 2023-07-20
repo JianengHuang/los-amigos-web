@@ -17,7 +17,7 @@ export const createDish = async (req: Request, res: Response) => {
   } = req?.body;
   console.log(mightContain);
   if (
-    !id ||
+    id === undefined ||
     !name ||
     !ingredients ||
     !price ||
@@ -48,6 +48,8 @@ export const createDish = async (req: Request, res: Response) => {
       return;
     }
     if (!doc) {
+      const ingredientsNoDuplicates = [...new Set(ingredientsArray)];
+      const allergensNoDuplicates = [...new Set(allergensArray)];
       try {
         const ingredientsArray = filterStringsInArray(ingredients);
         let newDish;

@@ -15,12 +15,12 @@ userRouter.post(
   emailToLowerCase,
   passport.authenticate('local'),
   (req, res) => {
-    // if (req.body.remember) {
-    //   req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
-    // } else {
-    //   //@ts-ignore
-    //   req.session.cookie.expires = false; // Cookie expires at end of session
-    // }
+    if (req.body.remember) {
+      req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
+    } else {
+      //@ts-ignore
+      req.session.cookie.expires = false; // Cookie expires at end of session
+    }
     res.send('Succesfully Logged In');
   }
 );
