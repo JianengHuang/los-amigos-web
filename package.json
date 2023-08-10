@@ -1,8 +1,16 @@
 {
-  "name": "mern-menu-api",
+  "name": "los-amigos-backend",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "repository": "https://github.com/JianengHuang/los-amigos-web.git",
-  "author": "Jianeng Huang <jianengh@gmail.com>",
-  "license": "MIT"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prisma": "^5.1.1",
+    "typescript": "^5.1.6"
+  }
 }
