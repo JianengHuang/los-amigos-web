@@ -2,7 +2,7 @@ name: NodeJS Continuous Delivery
 
 on:
   push:
-    branches: [**]
+    branches: ["**"]
 
 jobs:
   deploy:
