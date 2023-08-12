@@ -53,3 +53,27 @@ export const checkIfDishKeysMissing = async (
   }
   next();
 };
+
+export const checkIfCategoryKeysMissing = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { category, priority } = req.body;
+  let message;
+  // Check which keys are missing
+  if (category === undefined || priority === undefined) {
+    if (category === undefined && priority === undefined) {
+      message = "| category | priority |";
+    } else if (category === undefined) {
+      message = "| category |";
+    } else if (priority === undefined) {
+      message = "| priority |";
+    }
+    return res.status(400).json({
+      message: `Missing keys: ${message}`,
+    });
+  } else {
+    next();
+  }
+};

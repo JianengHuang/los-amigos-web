@@ -62,7 +62,29 @@ export const checkIfDishValuesCorrect = async (
 
   if (!everythingIsCorrect) {
     return res.status(400).json({
-      message: `Incorrect values: ${message}`,
+      message: `Incorrect values: | ${message}`,
+    });
+  } else {
+    next();
+  }
+};
+
+export const checkIfCategoryValuesCorrect = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { category, priority } = req.body;
+  let message = "";
+  if (typeof category !== "string" || typeof priority !== "number") {
+    if (typeof category !== "string") {
+      message += "category | ";
+    }
+    if (typeof priority !== "number") {
+      message += "priority | ";
+    }
+    return res.status(400).json({
+      message: `Incorrect values: | ${message}`,
     });
   } else {
     next();

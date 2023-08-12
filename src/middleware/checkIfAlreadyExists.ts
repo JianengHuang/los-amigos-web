@@ -12,7 +12,6 @@ export const checkIfDishAlreadyExists = async (
       OR: [{ dishId }, { name }],
     },
   });
-  console.log(response);
   if (response) {
     let message;
     if (response.dishId === dishId && response.name === name) {
@@ -24,6 +23,26 @@ export const checkIfDishAlreadyExists = async (
     }
     return res.status(400).json({
       message: `Dish with this ${message} already exists`,
+    });
+  } else {
+    next();
+  }
+};
+
+export const checkIfCategoryAlreadyExists = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { category } = req.body;
+  const response = await db.dish.findFirst({
+    where: {
+      category,
+    },
+  });
+  if (response) {
+    return res.status(400).json({
+      message: `Category with this |category| already exists`,
     });
   } else {
     next();
