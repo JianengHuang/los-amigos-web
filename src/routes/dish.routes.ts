@@ -9,7 +9,7 @@ import logger from "../middleware/logger";
 import { checkIfDishKeysMissing } from "../middleware/checkIfKeysMissing";
 import { checkIfDishValuesCorrect } from "../middleware/checkIfValuesCorrect";
 import { checkIfDishAlreadyExists } from "../middleware/checkIfAlreadyExists";
-import { checkIfIdExists } from "../middleware/checkIfIdExists";
+import { checkIfDishIdExists } from "../middleware/checkIfIdExists";
 
 const dishRoutes = express.Router();
 
@@ -24,8 +24,8 @@ dishRoutes.post(
   createDish
 );
 
-dishRoutes.put("/:id", logger, checkIfIdExists, modifyDish);
+dishRoutes.put("/:id", logger, checkIfDishIdExists, modifyDish);
 
-dishRoutes.delete("/:id", logger, checkIfIdExists, deleteDish);
+dishRoutes.delete("/:id", logger, checkIfDishIdExists, deleteDish);
 
 export default dishRoutes;
