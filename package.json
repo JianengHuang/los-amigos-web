@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ts-node src/server.ts",
-    "start": "pnpm build && node dist/server.js",
+    "start": "node dist/server.js",
     "lint": "eslint src --ext .ts",
-    "build": "pnpm exec tsc --build"
+    "build": "pnpm tsc --build"
   },
   "keywords": [],
   "author": "",
