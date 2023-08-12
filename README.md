@@ -1,12 +1,10 @@
 # los-amigos-web
 
-Website created for Restaurante Los Amigos 
+Website created for Restaurante Los Amigos
 
 <br>
 
-Tech Stack  
-
-<br>
+Tech Stack:
 
 <br>
 
