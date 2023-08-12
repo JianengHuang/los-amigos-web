@@ -1,13 +1,20 @@
-# los-amigos-web  
-Website created for Restaurante Los Amigos "\n"  
-  
+# los-amigos-web
+
+Website created for Restaurante Los Amigos 
+
+<br>
+
 Tech Stack  
 
+<br>
 
-Front-End:  
-  
+<br>
+
+Front-End:
+
 - NextJS (Server components)
 
+<br>
 
 Back-End:
 
