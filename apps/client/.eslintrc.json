@@ -1,0 +1,14 @@
+{
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:@typescript-eslint/recommended",
+		"eslint:recommended",
+		"plugin:prettier/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["react", "@typescript-eslint"],
+	"rules": {
+		"max-len": ["error", { "code": 140 }],
+		"prettier/prettier": ["error", { "endOfLine": "auto" }]
+	}
+}
