@@ -13,6 +13,21 @@
     "start": {
       "dependsOn": ["^build"],
       "persistent": true
+    },
+    "build:client": {
+      "dependsOn": ["start:api"],
+      "outputs": [".next/**", "!.next/cache/**, dist/**"]
+    },
+    "build:api": {
+      "dependsOn": ["lint", "^build"],
+      "outputs": ["dist/**"]
+    },
+    "start:api": {
+      "dependsOn": ["build:api"]
+    },
+    "start:client": {
+      "dependsOn": ["build:client"],
+      "persistent": true
     }
   }
 }
