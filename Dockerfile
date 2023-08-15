@@ -10,7 +10,6 @@ RUN ln .env ./apps/api/.env
 RUN ln .env ./apps/client/.env
 
 RUN pnpm i
-RUN pnpm i -g turbo
 RUN pnpm lint
 
 ARG CLIENT_PORT
