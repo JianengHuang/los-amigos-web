@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "turbo dev",
-    "start": "turbo start"
+    "start": "turbo start:client",
+    "lint": "turbo lint"
   },
   "keywords": [],
   "author": "",
