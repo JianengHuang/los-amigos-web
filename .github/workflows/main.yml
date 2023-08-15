@@ -29,3 +29,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
+          build-args: |
+            API_PORT=${{ secrets.PORT }}
+            CLIENT_PORT=${{ secrets.CLIENT_PORT }}

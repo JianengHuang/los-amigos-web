@@ -12,5 +12,8 @@ RUN ln .env ./apps/client/.env
 RUN pnpm i
 RUN pnpm i -g turbo
 RUN pnpm lint
+
+ARG CLIENT_PORT
+ARG API_PORT
 EXPOSE ${CLIENT_PORT} ${API_PORT}
 CMD [ "pnpm", "start" ]
