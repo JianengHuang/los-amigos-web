@@ -6,8 +6,8 @@ RUN corepack enable
 COPY . /app
 WORKDIR /app
 
-RUN ln -s .env ./apps/api/.env
-RUN ln -s .env ./apps/client/.env
+RUN ln .env ./apps/api/.env
+RUN ln .env ./apps/client/.env
 
 RUN pnpm i
 RUN pnpm i -g turbo
