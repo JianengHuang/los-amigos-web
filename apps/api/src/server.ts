@@ -1,7 +1,9 @@
 import express from "express";
-import "dotenv/config";
+import dotenv from "dotenv";
 import dishRoutes from "./routes/dish.routes";
 import categoryRoutes from "./routes/category.routes";
+
+dotenv.config({ path: "../../../.env" });
 
 const app = express();
 

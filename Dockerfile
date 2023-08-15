@@ -6,7 +6,6 @@ RUN corepack enable
 COPY . /app
 WORKDIR /app
 
-RUN ln .env ./apps/api/.env
 RUN ln .env ./apps/client/.env
 
 RUN pnpm i
