@@ -2,7 +2,11 @@ import db from "../db";
 import { Request, Response } from "express";
 
 export const getCategories = async (req: Request, res: Response) => {
-  const response = await db.category.findMany();
+  const response = await db.category.findMany({
+    orderBy: {
+      priority: "asc",
+    },
+  });
   res.status(200).json({ categories: response });
 };
 
