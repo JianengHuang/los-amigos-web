@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inriaSans.className}>
+			<body className={`${inriaSans.className} overflow-x-hidden`}>
 				<NavBar />
 				{children}
 			</body>

@@ -1,7 +1,5 @@
 import DishContainer from '@components/DishContainer';
-import { Suspense } from 'react';
 import getDishes from 'utils/getDishes';
-import Loading from './loading';
 import getCategories from 'utils/getCategories';
 
 export default async function Home() {
@@ -17,17 +15,14 @@ export default async function Home() {
 	}));
 
 	return (
-		<div>
-			<h1>Menu</h1>
+		<div className="mt-3">
 			{categorizedDishes.map((category) => (
 				<div key={category.id}>
-					<h2>{category.category}</h2>
-					<Suspense fallback={<Loading />}>
-						{category.dishes.map((dish) => (
-							<DishContainer key={dish.id} dish={dish} />
-						))}
-					</Suspense>
-					<hr />
+					<h2 className="mx-2 text-2xl capitalize">{category.category}</h2>
+					{category.dishes.map((dish) => (
+						<DishContainer key={dish.id} dish={dish} />
+					))}
+					<hr className="m-auto my-4 w-3/4" />
 				</div>
 			))}
 		</div>
