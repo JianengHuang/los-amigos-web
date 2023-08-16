@@ -5,8 +5,8 @@ import BurgerMenuIcon from './BurgerMenuIcon';
 const Navbar = () => {
 	return (
 		<>
-			<div className="absolute h-14 w-full bg-red-300 md:h-20"></div>
-			<div className="relative flex">
+			<div className="absolute h-14 w-full bg-red-300 md:h-[88px]"></div>
+			<div className="grid grid-cols-3">
 				<BurgerMenuIcon />
 				<div className="z-10 flex w-full flex-row items-center justify-center">
 					<Link href="/" className="flex select-none flex-row">
@@ -16,7 +16,7 @@ const Navbar = () => {
 							src="/logo/centered-transparent-happy-300.png"
 							alt="los amigos logo"
 						/>
-						<div className="m-1 hidden md:mx-5 md:flex md:flex-col md:content-center md:justify-center">
+						<div className="m-1 hidden max-w-[155px] md:mx-5 md:flex md:flex-col md:content-center md:justify-center">
 							<h1 className="text-2xl font-semibold leading-5">
 								Restaurante Los Amigos
 							</h1>

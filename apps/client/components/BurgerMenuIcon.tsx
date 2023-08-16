@@ -9,7 +9,7 @@ const BurgerMenuIcon = () => {
 	return (
 		<>
 			<div
-				className="z-20 mx-3 my-3 w-full cursor-pointer"
+				className="z-20 mx-3 my-3 max-h-[30px] max-w-[30px] cursor-pointer md:m-6 md:max-h-[40px] md:max-w-[40px]"
 				onClick={() => setSidebarIsOpen((sidebarIsOpen) => !sidebarIsOpen)}
 			>
 				<Image
@@ -17,6 +17,7 @@ const BurgerMenuIcon = () => {
 					alt="burger-icon"
 					width="30"
 					height="30"
+					className="md:h-[40px] md:w-[40px]"
 				/>
 			</div>
 			{sidebarIsOpen && <Sidebar />}
