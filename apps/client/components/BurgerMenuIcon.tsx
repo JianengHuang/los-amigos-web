@@ -20,7 +20,10 @@ const BurgerMenuIcon = () => {
 					className="md:h-[40px] md:w-[40px]"
 				/>
 			</div>
-			{sidebarIsOpen && <Sidebar setSidebarIsOpen={setSidebarIsOpen} />}
+			<Sidebar
+				sidebarIsOpen={sidebarIsOpen}
+				setSidebarIsOpen={setSidebarIsOpen}
+			/>
 		</>
 	);
 };

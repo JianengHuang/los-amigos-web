@@ -5,19 +5,25 @@ import { Dispatch, SetStateAction, useRef } from 'react';
 import Image from 'next/image';
 
 type PropsType = {
+	sidebarIsOpen: boolean;
 	setSidebarIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Sidebar = ({ setSidebarIsOpen }: PropsType) => {
+const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }: PropsType) => {
 	const boxRef = useRef(null);
-	useOutsideClick(boxRef, () => setSidebarIsOpen(false));
+	useOutsideClick(boxRef, sidebarIsOpen, () => setSidebarIsOpen(false));
 	return (
 		<div
 			ref={boxRef}
-			className="fixed z-50 h-full w-64 rounded-r-3xl bg-yellow-200 shadow-2xl"
+			className={`${
+				sidebarIsOpen ? 'translate-x-0' : '-translate-x-full'
+			} fixed left-0 top-0 z-50 h-screen w-64 rounded-r-3xl bg-yellow-200 shadow-2xl duration-300 ease-in-out`}
 		>
 			<div
-				className="m-3 flex w-[104px] cursor-pointer flex-row gap-2 rounded-md bg-red-200 pl-1 hover:bg-red-400"
+				className={`${
+					sidebarIsOpen ? 'translate-x-0' : '-translate-x-full'
+				} m-3 flex w-[104px] cursor-pointer  flex-row items-center justify-center 
+				gap-2 rounded-md bg-red-200 pl-1 hover:bg-red-400 md:m-6 md:w-[125px]`}
 				onClick={() => setSidebarIsOpen(false)}
 			>
 				<Image
@@ -25,8 +31,9 @@ const Sidebar = ({ setSidebarIsOpen }: PropsType) => {
 					alt="cross icon"
 					height="25"
 					width="25"
+					className="md:h-[30px] md:w-[30px]"
 				/>
-				<p className="text-2xl text-red-900">Cerrar</p>
+				<p className="text-2xl text-red-900 md:text-3xl">Cerrar</p>
 			</div>
 		</div>
 	);
