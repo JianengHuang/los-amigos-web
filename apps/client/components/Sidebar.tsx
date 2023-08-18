@@ -26,17 +26,16 @@ const Sidebar = ({ sidebarIsOpen, setSidebarIsOpen }: PropsType) => {
 				className={`${
 					sidebarIsOpen ? 'translate-x-0' : '-translate-x-full'
 				} fixed m-3 flex max-h-9 w-[104px]  cursor-pointer flex-row items-center 
-				justify-center gap-2 rounded-md bg-red-200 pl-1 hover:bg-red-400 md:m-6 md:w-[125px]`}
+				justify-center gap-2 rounded-md bg-slate-200 pl-1 hover:bg-slate-400 md:m-6 md:w-[125px]`}
 				onClick={() => setSidebarIsOpen(false)}
 			>
 				<Image
-					src="/icons/cross-icon.svg"
+					src="/icons/left-arrow-icon.svg"
 					alt="cross icon"
 					height="25"
 					width="25"
-					className="md:h-[30px] md:w-[30px]"
+					className="md:h-[40px] md:w-[40px]"
 				/>
-				<p className="text-2xl text-red-900 md:text-3xl">Cerrar</p>
 			</div>
 			<div className="relative top-24 flex flex-col gap-3">
 				<SidebarElement name="Carta" href="/" pathname={pathname} />

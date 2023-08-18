@@ -12,8 +12,8 @@ const SidebarElement = ({ name, href, pathname }: PropsType) => {
 			<div
 				className={`${
 					pathname === href
-						? 'cursor-default bg-gray-50'
-						: 'bg-gray-400 shadow-xl'
+						? 'cursor-default bg-gray-400'
+						: 'bg-gray-50 shadow-xl hover:bg-gray-200'
 				} text-3xl`}
 			>
 				<aside className="pl-4">{name}</aside>

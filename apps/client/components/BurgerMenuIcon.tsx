@@ -9,7 +9,8 @@ const BurgerMenuIcon = () => {
 	return (
 		<>
 			<div
-				className="z-20 mx-3 my-3 max-h-[30px] max-w-[30px] cursor-pointer md:m-6 md:max-h-[40px] md:max-w-[40px]"
+				className="z-20 mx-3 my-3 max-h-[30px] max-w-[30px] cursor-pointer rounded-3xl
+				hover:bg-gray-200 md:m-6 md:max-h-[40px] md:max-w-[40px]"
 				onClick={() => setSidebarIsOpen((sidebarIsOpen) => !sidebarIsOpen)}
 			>
 				<Image
