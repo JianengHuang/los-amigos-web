@@ -20,6 +20,7 @@ const DishContainer = ({ dish }: Props) => {
 				width={100}
 				height={100}
 				className="m-3 rounded-xl"
+				priority={false}
 			/>
 			<div className="mx-3 my-2 leading-8">
 				<h3 className="h-6 text-lg font-bold capitalize">{dish.name}</h3>
