@@ -12,9 +12,10 @@ const Navbar = () => {
 					<Link href="/" className="flex select-none flex-row">
 						<Image
 							width="75"
-							height="75"
+							height="76"
 							src="/logo/centered-transparent-happy-300.png"
 							alt="los amigos logo"
+							priority={false}
 						/>
 						<div className="m-1 hidden max-w-[155px] md:mx-5 md:flex md:flex-col md:content-center md:justify-center">
 							<h1 className="text-2xl font-semibold leading-5">
