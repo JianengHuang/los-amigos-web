@@ -4,6 +4,8 @@ import {
   createCategory,
   modifyCategory,
   deleteCategory,
+  createManyCategories,
+  deleteAllCategories,
 } from "../controllers/category.controller";
 import { checkIfCategoryAlreadyExists } from "../middleware/checkIfAlreadyExists";
 import { checkIfCategoryKeysMissing } from "../middleware/checkIfKeysMissing";
@@ -22,6 +24,8 @@ categoryRoutes.post(
   createCategory
 );
 
+categoryRoutes.post("/all", createManyCategories);
+
 categoryRoutes.put(
   "/:id",
   checkIfCategoryIdExists,
@@ -29,6 +33,8 @@ categoryRoutes.put(
   checkIfCategoryValuesCorrect,
   modifyCategory
 );
+
+categoryRoutes.delete("/all", deleteAllCategories);
 
 categoryRoutes.delete("/:id", checkIfCategoryIdExists, deleteCategory);
 
