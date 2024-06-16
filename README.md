@@ -8,6 +8,12 @@ Tech Stack:
 
 <br>
 
+Monorepo: Turborepo  
+Deploy: Docker Container  
+CI/CD: Github Actions
+
+<br>
+
 Front-End:
 
 - NextJS (Server components)
@@ -17,4 +23,4 @@ Front-End:
 Back-End:
 
 - Express.js (Node.js + TypeScript)
-- Prisma ORM (+ MongoDB)
+- Prisma ORM (MongoDB)

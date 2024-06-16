@@ -6,17 +6,12 @@ RUN corepack enable
 COPY . /app
 WORKDIR /app
 
-FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN ln .env ./apps/client/.env
 
-FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run lint
-RUN pnpm prisma generate
-RUN pnpm run build
+RUN pnpm i
+RUN pnpm lint
 
-FROM base
-COPY --from=prod-deps /app/node_modules /app/node_modules
-COPY --from=build /app/dist /app/dist
-EXPOSE 4000
+ARG CLIENT_PORT
+ARG API_PORT
+EXPOSE ${CLIENT_PORT} ${API_PORT}
 CMD [ "pnpm", "start" ]

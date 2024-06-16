@@ -2,7 +2,9 @@ import db from "../db";
 import { Request, Response } from "express";
 
 export const getDishes = async (req: Request, res: Response) => {
-  const response = await db.dish.findMany();
+  const response = await db.dish.findMany({
+    orderBy: { priority: "asc" },
+  });
   res.status(200).json({ dishes: response });
 };
 
